@@ -1,0 +1,7 @@
+.idea
+node_modules
+*.csv
+*.log
+.profile
+*.svg
+src/video/*

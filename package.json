@@ -1,0 +1,14 @@
+{
+  "name": "JJ speech",
+  "version": "1.0.0",
+  "description": "Simple express server",
+  "main": "index.js",
+  "scripts": {
+    "start": "nf start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}

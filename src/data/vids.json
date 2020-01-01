@@ -1,0 +1,1 @@
+vids = '[{"name" : "moon-1", "trigger" : "moon"},{"name" : "moon-2","trigger" : "surface"},{"name" : "char", "trigger" : "burger"},{"name" : "empty"}]';
