@@ -1,1 +1,1 @@
-vids = '[{"name" : "moon-1", "trigger" : "moon"},{"name" : "moon-2","trigger" : "surface"},{"name" : "char", "trigger" : "burger"},{"name" : "empty"}]';
+vids = '[{"name" : "moon-1", "trigger" : "moon"},{"name" : "chair-1", "trigger" : "broke"},{"name" : "moon-2","trigger" : "surface"},{"name" : "char", "trigger" : "burger"},{"name" : "empty", "trigger" : "empty"}]';

@@ -29,9 +29,28 @@ html {
   text-align: left;
   font-weight: 100;
   font-size: 114px;
-  width: 60%;
+  width: 100%;
   margin: 0;
   border-right: 1px solid #000;
+}
+
+.header.take {
+  background: rgba(0,0,0,.5);
+  position: absolute;
+  color: #fff;
+  top: 0;
+  z-index: 999;
+  height: 100vh;
+
+}
+.header.take .header__title {
+  text-transform: uppercase;
+  text-align: left;
+  font-weight: 100;
+  font-size: 300px;
+  width: 100%;
+  margin: 0;
+  background: none;
 }
 
 .header__right {

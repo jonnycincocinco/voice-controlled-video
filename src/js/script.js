@@ -1,3 +1,7 @@
+////future features:
+// crossfade changes (triggered by spoken numbers)
+
+
 (function() {
   'use strict';
 
@@ -11,7 +15,7 @@
   var myVids = JSON.parse(vids);
   var vidContainer = document.getElementsByClassName("vid-container")[0];
 
-  //create video elements from JSON 
+  //create video elements from JSON
 
   for (var i = 0; i < myVids.length; i++) {
     var vidEl = document.createElement("video");
@@ -20,7 +24,16 @@
     vidEl.id = myVids[i].trigger;
     vidEl.loop = "true ";
     vidContainer.appendChild(vidEl);
+
+
   }
+
+  var takeOverPhrases = JSON.parse(takeover);
+
+  console.log(takeOverPhrases);
+
+
+
 
 
   var recognition = new webkitSpeechRecognition(),
@@ -35,18 +48,22 @@
     start: document.querySelector('[data-start]'),
     speech: document.querySelector('[data-speech]'),
     speechInner: document.querySelector('[data-header]'),
-    cube: document.querySelector('[data-vid]')
+    cube: document.querySelector('[data-vid]'),
+    takeText: document.querySelector('[data-takeover]')
   };
 
-  var trigger1 = myVids[0].trigger;
   // speech triggers and css classes
+
+
   var triggers = {
     'moon': 'moon',
     'surface': 'surface',
+    'broke': 'broke',
     'burger': 'burger',
-    'bottom': 'show-bottom'
+    'empty': 'empty'
 
   };
+
 
   // initialize speech recognition
   recognition.continuous = true;
@@ -83,6 +100,12 @@
       // update speech recognition visual
       nodes.speechInner.innerHTML = transcript;
 
+      if (transcript === takeOverPhrases[0].text) {
+        console.log('didnt');
+        $('.header').addClass('take');
+      } else {
+        $('.header').removeClass('take');
+      }
 
 
       // we have a trigger match
@@ -106,18 +129,22 @@
 
         for (var q = 0; q < myVids.length; q++) {
           var trig = myVids[q].trigger;
-          var vidStop = $( "video" )
+          // var vidStop = $( "video" )
+          // vidStop.addEventListener('ended', function(){
+          //
+          // }
 
-          if(match.class == trig) {
-            $("." + trig).fadeIn(300);
+          var changeval = "2000";
+          if(match.trigger == trig) {
+            $("." + trig).fadeIn(changeval);
             $("." + trig)[0].play();
-            $( "video" ).not("." + trig).hide();
-
+            $( "video" ).not("." + trig).fadeOut(changeval);
             $('video').each(function( index ) {
                 if(match.class != this.id){
+                    this.animate({volume: 0}, changeval);
                     this.pause();
                     this.currentTime = 0;
-                }
+                  }
             });
           }
         }
@@ -157,7 +184,6 @@
 
     for(var x in triggers) {
       var split = x.split(' ');
-
       split.every(function(s) {
         if(check.indexOf(s) > -1) {
           cls = triggers[x];
@@ -168,6 +194,8 @@
         return true;
       });
     }
+
+    console.log(trg);
 
     return cls && trg ? {
       class: cls,
