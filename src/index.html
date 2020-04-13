@@ -4,15 +4,21 @@
   <meta charset="UTF-8">
   <title>Voice Controlled Cube</title>
   <link href="https://fonts.googleapis.com/css?family=Raleway+Dots&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
 <!-- partial:index.partial.html -->
 <main class="main">
   <header class="header">
-    <h1 data-header class="header__title">Voice Control</h1>
+    <h1 data-header class="header__title">Questions for a Flower</h1>
     <!-- <h1 data-takeover class="header__take"></h1> -->
   </header>
+
+  <!-- <div class="zoom-frame">
+      	<iframe allow="microphone; camera" style="border: 0; height: 50%; left: 0; position: absolute; top: 0; width: 50%;" src="https://success.zoom.us/wc/join/4736423432" frameborder="0"></iframe>
+  	</div> -->
 
   <div class="cube">
     <div data-vid class="vid-container">
@@ -21,15 +27,17 @@
   </div>
 </main>
 
-<a data-start class="record-btn"><i class="material-icons">mic</i></a>
+<a data-start class="record-btn"></a>
 
 <div data-speech class="speech"><p class="speech__inner">Speak now...</p></div>
 
 
 <!-- partial -->
+  <script type="text/javascript" src="js/lib/VideoFrame.min.js"></script>
   <script src='https://code.jquery.com/jquery-2.1.4.min.js'></script>
   <script type="text/javascript" src="./data/takeover.json"></script>
-  <script type="text/javascript" src="./data/vids.json"></script>
+  <script type="text/javascript" src="./data/flower.json"></script>
+  <!-- <script type="text/javascript" src="./data/vids.json"></script> -->
   <script  src="./js/script.js"></script>
 
 </body>

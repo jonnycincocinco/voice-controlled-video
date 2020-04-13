@@ -1,0 +1,1 @@
+flower = '[{"name" : "flwr-arp-3", "trigger" : "flower"},{"name" : "flwr-main", "trigger" : "question"},{"name" : "chair-1", "trigger" : "break"}]';

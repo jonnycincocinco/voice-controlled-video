@@ -12,7 +12,8 @@
   }
 
 
-  var myVids = JSON.parse(vids);
+  // var myVids = JSON.parse(vids);
+  var myVids = JSON.parse(flower);
   var vidContainer = document.getElementsByClassName("vid-container")[0];
 
   //create video elements from JSON
@@ -22,15 +23,17 @@
     vidEl.src = "video/" + myVids[i].name + '.mp4';
     vidEl.classList = "vid " + myVids[i].trigger;
     vidEl.id = myVids[i].trigger;
-    vidEl.loop = "true ";
+    vidEl.loop = "true";
     vidContainer.appendChild(vidEl);
-
 
   }
 
+
+
+
   var takeOverPhrases = JSON.parse(takeover);
 
-  console.log(takeOverPhrases);
+  // console.log(takeOverPhrases);
 
 
 
@@ -56,9 +59,9 @@
 
 
   var triggers = {
-    'moon': 'moon',
-    'surface': 'surface',
-    'broke': 'broke',
+    'flower': 'flower',
+    'break': 'break',
+    'question': 'question',
     'burger': 'burger',
     'empty': 'empty'
 
@@ -73,16 +76,21 @@
   // speech recognition started
   recognition.onstart = function() {
     recognizing = true;
+    console.log('speech start');
     // nodes.start.classList.add('active');
     // nodes.speech.classList.add('active');
   };
 
   // speech recognition end
   recognition.onend = function(event) {
+    recognition.start(); //keep it going
+    console.log('recognition ended');
     recognizing = false;
-    // nodes.start.classList.remove('active');
-    // nodes.speech.classList.remove('active');
   };
+
+
+
+  var duration = 0;
 
   // speech recognition result
   recognition.onresult = function(event) {
@@ -111,22 +119,6 @@
       // we have a trigger match
       if(match) {
 
-        // allow user to see matched trigger with 500ms delay
-        setTimeout(function() {
-
-          // recognizing = false;
-          // recognition.stop();
-
-          // if cube has classes remove all
-          if(nodes.cube.getAttribute('class')) {
-            // DOMTokenList.prototype.remove.apply(nodes.cube.classList, nodes.cube.getAttribute('class').split(' '));
-          }
-
-          // add matched triggers classes
-          // DOMTokenList.prototype.add.apply(nodes.cube.classList, match.class.split(' '));
-      }, 100);
-
-
         for (var q = 0; q < myVids.length; q++) {
           var trig = myVids[q].trigger;
           // var vidStop = $( "video" )
@@ -134,23 +126,75 @@
           //
           // }
 
-          var changeval = "2000";
+          var changeval = "1000";
           if(match.trigger == trig) {
-            $("." + trig).fadeIn(changeval);
-            $("." + trig)[0].play();
+            const trigVid = $("." + trig);
+            duration = trigVid[0].duration * 1000;
+            // trigVid[0].play();
+            // trigVid.fadeIn(changeval);
+            // trigVid.animate({volume: 1}, changeval);
+            // $( "video" ).not("." + trig).fadeOut(changeval);
+            // $( "video" ).not("." + trig).animate({volume: 0}, changeval);
+            // $( "video" ).not("." + trig).fadeOut(changeval);
+            // $( "video" ).not("." + trig).fadeOut(changeval);
+            trigVid.animate({volume: 1}, changeval);
+            trigVid.fadeIn(changeval);
+            trigVid[0].play();
             $( "video" ).not("." + trig).fadeOut(changeval);
             $('video').each(function( index ) {
                 if(match.class != this.id){
                     this.animate({volume: 0}, changeval);
                     this.pause();
                     this.currentTime = 0;
+                    console.log(this.id);
                   }
             });
+            const vidLength = trigVid[0].duration;
+            // console.log(trigVid);
+            if(!trigVid[0].paused && trigVid[0].currentTime > 2) {
+              //repeat
+              // console.log('dub');
+              // trigVid[0].pause();
+              // trigVid[0].currentTime = 0;
+              // trigVid[0].play();
+            }
+            // if(!trigVid[0].paused && trigVid[0].currentTime > 2) {
+            //   const vidLength = trigVid[0].duration;
+            //   const trim = vidLength - 1;
+            //   console.log(vidLength,trim);
+            //   console.log('trim');
+            //   trigVid[0].pause();
+            //   trigVid[0].currentTime = 0;
+            //   trigVid[0].play();
+            //
+            // }
+            var video = VideoFrame({
+                id: trigVid[0].id,
+                frameRate: 24,
+                callback : function(frame) {
+                 var milliseconds = video.toMilliseconds();
+                 var durationClip = duration * .975;
+                 if (milliseconds > durationClip) {
+                   // console.log(duration);
+                   video.video.pause();
+                   video.video.currentTime = 0;
+                   video.video.play();
+                 }
+               }
+            });
+            video.listen('frame');
+
+
+
           }
         }
       }
     }
   };
+
+
+
+
 
   // speech recognition error
   recognition.onerror = function(event) {
@@ -205,6 +249,7 @@
 
   // instantiate material design modal JS
   $(document).ready(function() {
+
     // $('.modal-trigger').leanModal();
   });
 })();

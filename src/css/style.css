@@ -1,9 +1,10 @@
 body,
 html {
-  background: #f7f7f7;
+  background: #121212;
   height: 100%;
   margin: 0;
-  font-family: 'Raleway Dots', cursive;
+  /* font-family: 'Raleway Dots', cursive; */
+  font-family: 'Abril Fatface', cursive;
 
 }
 
@@ -41,6 +42,9 @@ html {
   top: 0;
   z-index: 999;
   height: 100vh;
+  font-family: 'Raleway Dots', cursive;
+
+
 
 }
 .header.take .header__title {
@@ -61,12 +65,22 @@ html {
   margin: 0;
 }
 
+.zoom-frame {
+  position: absolute;
+  width: 50vw;
+  height: auto;
+  z-index: 9999;
+  overflow: hidden;
+  padding-top: 56.25%;
+}
+
 .record-btn {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background: #000;
+  background: #ca3a23;
   height: 40px;
+  z-index: 999999;
 }
 
 .recording {
