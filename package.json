@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "express": "^4.15.2",
+    "express": "^4.17.3",
     "videocontext": "^0.54.0"
   }
 }
